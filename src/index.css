@@ -1,1 +1,110 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 240 27% 98%;
+    --foreground: 231 28% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 231 28% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 231 28% 7%;
+
+    --primary: 252 94% 67%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 252 100% 79%;
+
+    --secondary: 231 73% 93%;
+    --secondary-foreground: 231 37% 63%;
+
+    --muted: 231 67% 99%;
+    --muted-foreground: 231 20% 61%;
+
+    --accent: 231 73% 93%;
+    --accent-foreground: 231 28% 7%;
+
+    --destructive: 0 80% 63%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-hover: 0 100% 80%;
+
+    --border: 231 75% 93%;
+    --input: 231 75% 93%;
+    --ring: 252 94% 67%;
+
+    --status-paid: 160 67% 52%;
+    --status-paid-bg: 160 67% 52%;
+    --status-pending: 34 100% 50%;
+    --status-pending-bg: 34 100% 50%;
+    --status-draft: 231 20% 27%;
+    --status-draft-bg: 231 20% 27%;
+
+    --sidebar-background: 231 28% 14%;
+    --sidebar-foreground: 0 0% 100%;
+    --total-bg: 231 20% 27%;
+    --total-foreground: 0 0% 100%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 233 30% 11%;
+    --foreground: 0 0% 100%;
+
+    --card: 233 31% 17%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 233 31% 17%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 252 94% 67%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 252 100% 79%;
+
+    --secondary: 233 30% 21%;
+    --secondary-foreground: 231 36% 78%;
+
+    --muted: 233 31% 17%;
+    --muted-foreground: 231 36% 63%;
+
+    --accent: 233 30% 21%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 80% 63%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-hover: 0 100% 80%;
+
+    --border: 233 30% 21%;
+    --input: 233 30% 21%;
+    --ring: 252 94% 67%;
+
+    --status-paid: 160 67% 52%;
+    --status-pending: 34 100% 50%;
+    --status-draft: 231 36% 78%;
+
+    --sidebar-background: 233 31% 17%;
+    --sidebar-foreground: 0 0% 100%;
+    --total-bg: 231 28% 7%;
+    --total-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Spartan", "League Spartan", system-ui, sans-serif;
+    font-feature-settings: "kern";
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
