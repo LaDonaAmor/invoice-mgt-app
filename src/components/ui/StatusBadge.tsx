@@ -8,6 +8,12 @@ const styles: Record<InvoiceStatus, string> = {
     "bg-status-draft/10 text-status-draft dark:bg-white/5 dark:text-secondary-foreground",
 };
 
+const dotStyles: Record<InvoiceStatus, string> = {
+  paid: "bg-status-paid",
+  pending: "bg-status-pending",
+  draft: "bg-status-draft",
+};
+
 const labels: Record<InvoiceStatus, string> = {
   paid: "Paid",
   pending: "Pending",
@@ -24,13 +30,13 @@ export function StatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-bold capitalize min-w-26 justify-center",
+        "inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-bold capitalize min-w-26 justify-center",
         styles[status],
         className,
       )}
     >
       <span
-        className={cn("h-2 w-2 rounded-full", `bg-status-${status}`)}
+        className={cn("h-2 w-2 rounded-full", dotStyles[status])}
         aria-hidden
       />
       {labels[status]}

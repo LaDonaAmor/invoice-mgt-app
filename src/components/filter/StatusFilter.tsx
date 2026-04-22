@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import type { InvoiceStatus } from "@/types/invoice";
 import { cn } from "@/lib/utils";
 
@@ -60,12 +60,23 @@ export function StatusFilter({ value, onChange }: Props) {
           <span className="sm:hidden">Filter</span>
         </span>
 
-        <ChevronDown
+        <svg
+          width="10"
+          height="7"
+          viewBox="0 0 10 7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
           className={cn(
             "h-3 w-3 text-primary transition-transform",
             open && "rotate-180",
           )}
-        />
+        >
+          <path
+            d="M0.707031 0.707153L4.93493 4.93505L9.16283 0.707153"
+            stroke="#7C5DFA"
+            stroke-width="2"
+          />
+        </svg>
       </button>
 
       {open && (

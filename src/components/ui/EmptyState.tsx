@@ -436,7 +436,7 @@ export function EmptyState({
           <>
             Create an invoice by clicking the
             <br className="block" />{" "}
-            <strong className="text-foreground whitespace-nowrap">
+            <strong className="text-muted-foreground whitespace-nowrap">
               New Invoice
             </strong>{" "}
             button and get started.
