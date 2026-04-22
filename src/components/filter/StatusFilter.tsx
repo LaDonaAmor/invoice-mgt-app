@@ -20,34 +20,46 @@ export function StatusFilter({ value, onChange }: Props) {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
+      }
     };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
     document.addEventListener("mousedown", onClick);
     document.addEventListener("keydown", onKey);
+
     return () => {
       document.removeEventListener("mousedown", onClick);
       document.removeEventListener("keydown", onKey);
     };
   }, []);
 
-  const toggleVal = (v: InvoiceStatus) =>
-    onChange(value.includes(v) ? value.filter((x) => x !== v) : [...value, v]);
+  const toggleVal = (v: InvoiceStatus) => {
+    if (value.includes(v)) {
+      onChange(value.filter((x) => x !== v));
+    } else {
+      onChange([...value, v]);
+    }
+  };
 
   return (
     <div ref={ref} className="relative">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        aria-haspopup="listbox"
         aria-expanded={open}
+        aria-controls="status-filter-menu"
         className="inline-flex items-center gap-3 text-sm font-bold tracking-tight focus-ring rounded-md px-2 py-2 hover:text-primary"
       >
         <span>
           <span className="hidden sm:inline">Filter by status</span>
           <span className="sm:hidden">Filter</span>
         </span>
+
         <ChevronDown
           className={cn(
             "h-3 w-3 text-primary transition-transform",
@@ -55,16 +67,19 @@ export function StatusFilter({ value, onChange }: Props) {
           )}
         />
       </button>
+
       {open && (
         <ul
-          role="listbox"
+          id="status-filter-menu"
           className="absolute right-0 mt-4 w-48 rounded-lg bg-popover shadow-2xl p-6 space-y-4 z-20"
         >
           {OPTIONS.map((o) => {
             const checked = value.includes(o.value);
+
             return (
               <li key={o.value}>
                 <label className="flex items-center gap-3 cursor-pointer text-sm font-bold group">
+                  {/* Custom checkbox UI */}
                   <span
                     className={cn(
                       "h-4 w-4 rounded-sm border flex items-center justify-center transition-colors",
@@ -80,12 +95,15 @@ export function StatusFilter({ value, onChange }: Props) {
                       />
                     )}
                   </span>
+
+                  {/* Actual checkbox (accessible) */}
                   <input
                     type="checkbox"
                     className="sr-only"
                     checked={checked}
                     onChange={() => toggleVal(o.value)}
                   />
+
                   {o.label}
                 </label>
               </li>
