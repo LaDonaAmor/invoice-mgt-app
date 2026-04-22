@@ -1,6 +1,7 @@
 {
   "name": "invoice-mgt-app",
-  "private": true,
+  "homepage": "https://LaDonaAmor.github.io/invoice-mgt-app",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {

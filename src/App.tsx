@@ -19,7 +19,7 @@ function App() {
             <Toaster />
             <Sonner position="top-right" />
             {/* Routing */}
-            <BrowserRouter>
+            <BrowserRouter basename="/invoice-mgt-app/">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/invoice/:id" element={<InvoiceDetailPage />} />
