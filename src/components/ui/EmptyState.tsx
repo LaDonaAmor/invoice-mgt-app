@@ -428,15 +428,18 @@ export function EmptyState({
         />
       </svg>
 
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">
+      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6 mt-16">
         {title}
       </h2>
       <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
         {description ?? (
           <>
-            Create an invoice by clicking the{" "}
-            <strong className="text-foreground">New Invoice</strong> button and
-            get started.
+            Create an invoice by clicking the
+            <br className="block" />{" "}
+            <strong className="text-foreground whitespace-nowrap">
+              New Invoice
+            </strong>{" "}
+            button and get started.
           </>
         )}
       </p>

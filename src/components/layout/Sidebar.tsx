@@ -7,14 +7,10 @@ export function Sidebar() {
   return (
     <aside className="bg-sidebar-bg text-sidebar-fg flex lg:flex-col items-center justify-between lg:fixed lg:inset-y-0 lg:left-0 lg:w-25.75 lg:rounded-r-2xl z-30 h-18 lg:h-screen w-full">
       <a
-        href="/"
-        className="relative flex items-center justify-center bg-primary rounded-r-2xl h-full w-18 lg:w-full lg:h-25.72 overflow-hidden focus-ring"
+        href="/.."
+        className="relative flex items-center justify-center bg-primary rounded-r-2xl h-full w-18 lg:h-24 lg:w-full overflow-hidden focus-ring"
         aria-label="Invoicely home"
       >
-        <span
-          className="absolute inset-0 top-1/2 bg-primary-hover rounded-tl-2xl"
-          aria-hidden
-        />
         <svg
           width="103"
           height="103"
