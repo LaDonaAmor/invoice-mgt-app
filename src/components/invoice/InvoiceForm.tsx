@@ -354,7 +354,7 @@ export function InvoiceForm({
                     type="button"
                     onClick={() => removeItem(it.id)}
                     aria-label="Remove item"
-                    className="self-center text-muted-foreground hover:text-destructive transition-colors p-2 focus-ring rounded"
+                    className="self-center text-muted-foreground hover:text-destructive transition-colors p-2 focus-ring rounded cursor-pointer"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>

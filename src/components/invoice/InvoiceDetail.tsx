@@ -123,7 +123,7 @@ export function InvoiceDetail() {
 
         <div className="rounded-lg overflow-hidden bg-muted">
           <div className="p-6 md:p-8">
-            <div className="hidden md:grid grid-cols-[1fr_80px_120px_120px] gap-4 text-xs text-muted-foreground mb-6">
+            <div className="hidden md:grid grid-cols-[1fr_80px_110px_110px] gap-4 text-sm text-muted-foreground mb-6">
               <span>Item Name</span>
               <span className="text-center">QTY.</span>
               <span className="text-right">Price</span>
@@ -133,23 +133,23 @@ export function InvoiceDetail() {
               {inv.items.map((it) => (
                 <li
                   key={it.id}
-                  className="grid grid-cols-2 md:grid-cols-[1fr_80px_120px_120px] gap-4 items-center"
+                  className="grid grid-cols-2 md:grid-cols-[1fr_80px_110px_110px] gap-4 items-center"
                 >
                   <div>
-                    <p className="text-sm font-bold tracking-tight">
+                    <p className="text-lg font-bold tracking-tight">
                       {it.name}
                     </p>
-                    <p className="text-sm font-bold text-muted-foreground md:hidden mt-2">
+                    <p className="text-lg font-bold text-muted-foreground md:hidden mt-2">
                       {it.quantity} x {formatCurrency(it.price)}
                     </p>
                   </div>
-                  <p className="hidden md:block text-sm font-bold text-muted-foreground text-center">
+                  <p className="hidden md:block text-lg font-bold text-muted-foreground text-center">
                     {it.quantity}
                   </p>
-                  <p className="hidden md:block text-sm font-bold text-muted-foreground text-right">
+                  <p className="hidden md:block text-lg font-bold text-muted-foreground text-right">
                     {formatCurrency(it.price)}
                   </p>
-                  <p className="text-sm font-bold tracking-tight text-right">
+                  <p className="text-lg font-bold tracking-tight text-right">
                     {formatCurrency(it.quantity * it.price)}
                   </p>
                 </li>
