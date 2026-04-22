@@ -25,7 +25,7 @@ export function InvoiceList({ onNew }: { onNew: () => void }) {
         <div className="flex items-center gap-4 md:gap-10">
           <StatusFilter value={filters} onChange={setFilters} />
           <Button onClick={onNew} className="pl-2 pr-5 gap-3 cursor-pointer">
-            <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-card text-primary shrink-0">
+            <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-primary shrink-0">
               <svg
                 width="10"
                 height="10"
@@ -36,7 +36,7 @@ export function InvoiceList({ onNew }: { onNew: () => void }) {
               >
                 <path
                   d="M6.29017 10V6.29017H10V3.70983H6.29017V0H3.70983V3.70983H0V6.29017H3.70983V10H6.29017Z"
-                  fill="#7C5DFA"
+                  fill="currentColor"
                 />
               </svg>
             </span>
