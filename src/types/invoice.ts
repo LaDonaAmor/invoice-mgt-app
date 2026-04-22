@@ -1,4 +1,4 @@
-export type InvoiceStatus = "drafts" | "pending" | "paid";
+export type InvoiceStatus = "draft" | "pending" | "paid";
 
 export interface Address {
   street: string;

@@ -2,7 +2,7 @@ import {
   createContext,
   useContext,
   useMemo,
-  ReactNode,
+  type ReactNode,
   useCallback,
 } from "react";
 import type { Invoice, InvoiceStatus } from "@/types/invoice";

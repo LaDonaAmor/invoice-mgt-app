@@ -4,14 +4,14 @@ import { cn } from "@/lib/utils";
 const styles: Record<InvoiceStatus, string> = {
   paid: "bg-status-paid/10 text-status-paid",
   pending: "bg-status-pending/10 text-status-pending",
-  drafts:
+  draft:
     "bg-status-draft/10 text-status-draft dark:bg-white/5 dark:text-secondary-foreground",
 };
 
 const labels: Record<InvoiceStatus, string> = {
   paid: "Paid",
   pending: "Pending",
-  drafts: "Draft",
+  draft: "Draft",
 };
 
 export function StatusBadge({

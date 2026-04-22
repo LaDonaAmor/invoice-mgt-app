@@ -4,7 +4,7 @@ import type { InvoiceStatus } from "@/types/invoice";
 import { cn } from "@/lib/utils";
 
 const OPTIONS: { value: InvoiceStatus; label: string }[] = [
-  { value: "drafts", label: "Draft" },
+  { value: "draft", label: "Draft" },
   { value: "pending", label: "Pending" },
   { value: "paid", label: "Paid" },
 ];
