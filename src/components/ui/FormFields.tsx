@@ -6,6 +6,10 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { useRef, useState, useEffect } from "react";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { format, parseISO } from "date-fns";
 
 interface FieldWrapperProps {
   label?: string;
@@ -78,7 +82,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           aria-invalid={!!error}
           className={cn(
-            "h-12 w-full rounded-md border bg-card px-5 text-sm font-bold text-foreground placeholder:text-muted-foreground transition-colors focus-ring",
+            "h-12 w-full rounded-md border bg-card px-5 text-sm font-bold text-foreground placeholder:text-muted-foreground transition-colors focus-ring cursor-pointer",
             error ? "border-destructive" : "border-border hover:border-primary",
             className,
           )}
@@ -95,6 +99,83 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   error?: string;
   options: { value: string; label: string }[];
   wrapperClassName?: string;
+}
+
+interface DatePickerProps {
+  label?: string;
+  value: string; // ISO string
+  onChange: (iso: string) => void;
+  disabled?: boolean;
+  error?: string;
+  wrapperClassName?: string;
+}
+
+export function DatePicker({
+  label,
+  value,
+  onChange,
+  disabled,
+  error,
+  wrapperClassName,
+}: DatePickerProps) {
+  const generatedId = useId();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const selected = value ? parseISO(value) : undefined;
+  const display = selected ? format(selected, "dd MMM yyyy") : "Select date";
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <Field
+      id={generatedId}
+      label={label}
+      error={error}
+      className={wrapperClassName}
+    >
+      <div ref={ref} className="relative">
+        <button
+          type="button"
+          id={generatedId}
+          disabled={disabled}
+          onClick={() => !disabled && setOpen((o) => !o)}
+          className={cn(
+            "h-12 w-full rounded-md border bg-card px-5 text-sm font-bold text-foreground transition-colors focus-ring flex items-center justify-between cursor-pointer",
+            error ? "border-destructive" : "border-border hover:border-primary",
+            disabled && "opacity-50 cursor-not-allowed",
+          )}
+        >
+          {display}
+          <CalendarIcon className="h-4 w-4 text-primary" />
+        </button>
+
+        {open && (
+          <div className="absolute z-50 mt-2 rounded-xl border border-border bg-card shadow-lg">
+            <Calendar
+              mode="single"
+              selected={selected}
+              onSelect={(date) => {
+                if (date) {
+                  onChange(date.toISOString());
+                  setOpen(false);
+                }
+              }}
+              initialFocus
+            />
+          </div>
+        )}
+      </div>
+    </Field>
+  );
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(

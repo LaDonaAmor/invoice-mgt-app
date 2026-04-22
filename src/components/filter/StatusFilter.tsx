@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import type { InvoiceStatus } from "@/types/invoice";
 import { cn } from "@/lib/utils";
 
@@ -53,19 +53,30 @@ export function StatusFilter({ value, onChange }: Props) {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="status-filter-menu"
-        className="inline-flex items-center gap-3 text-sm font-bold tracking-tight focus-ring rounded-md px-2 py-2 hover:text-primary"
+        className="inline-flex items-center gap-3 text-sm font-bold tracking-tight focus-ring rounded-md px-2 py-2 hover:text-primary cursor-pointer"
       >
         <span>
           <span className="hidden sm:inline">Filter by status</span>
           <span className="sm:hidden">Filter</span>
         </span>
 
-        <ChevronDown
+        <svg
+          width="10"
+          height="7"
+          viewBox="0 0 10 7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
           className={cn(
             "h-3 w-3 text-primary transition-transform",
             open && "rotate-180",
           )}
-        />
+        >
+          <path
+            d="M0.707031 0.707153L4.93493 4.93505L9.16283 0.707153"
+            stroke="#7C5DFA"
+            stroke-width="2"
+          />
+        </svg>
       </button>
 
       {open && (

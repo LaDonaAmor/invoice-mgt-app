@@ -1,11 +1,10 @@
 import { useEffect, useId, useState } from "react";
 import { Trash2, Plus } from "lucide-react";
 import type { Invoice, InvoiceItem } from "@/types/invoice";
-import { Input, Select } from "../ui/FormFields";
+import { Input, Select, DatePicker } from "../ui/FormFields";
 import { Button } from "../ui/AppButton";
 import { Modal } from "../ui/AppModal";
 import { generateUid } from "@/utils/generateId";
-import { toDateInputValue } from "@/utils/formatDate";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 type FormState = Omit<Invoice, "id" | "paymentDue" | "total" | "status">;
@@ -177,7 +176,7 @@ export function InvoiceForm({
           </h2>
 
           {/* Bill From */}
-          <h3 className="text-xs font-bold text-primary mb-6">Bill From</h3>
+          <h3 className="text-base font-bold text-primary mb-6">Bill From</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             <Input
               label="Street Address"
@@ -216,7 +215,9 @@ export function InvoiceForm({
           </div>
 
           {/* Bill To */}
-          <h3 className="text-xs font-bold text-primary mt-12 mb-6">Bill To</h3>
+          <h3 className="text-base font-bold text-primary mt-12 mb-6">
+            Bill To
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             <Input
               label="Client's Name"
@@ -271,13 +272,10 @@ export function InvoiceForm({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-            <Input
+            <DatePicker
               label="Invoice Date"
-              type="date"
-              value={toDateInputValue(state.createdAt)}
-              onChange={(e) =>
-                patch("createdAt", new Date(e.target.value).toISOString())
-              }
+              value={state.createdAt}
+              onChange={(iso) => patch("createdAt", iso)}
               disabled={isEdit}
             />
             <Select
@@ -356,7 +354,7 @@ export function InvoiceForm({
                     type="button"
                     onClick={() => removeItem(it.id)}
                     aria-label="Remove item"
-                    className="self-center text-muted-foreground hover:text-destructive transition-colors p-2 focus-ring rounded"
+                    className="self-center text-muted-foreground hover:text-destructive transition-colors p-2 focus-ring rounded cursor-pointer"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
