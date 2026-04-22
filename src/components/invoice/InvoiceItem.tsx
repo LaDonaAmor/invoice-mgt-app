@@ -8,7 +8,7 @@ export function InvoiceItem({ invoice }: { invoice: Invoice }) {
   return (
     <Link
       to={`/invoice/${invoice.id}`}
-      className="block bg-card rounded-lg border border-transparent hover:border-primary transition-colors focus-ring shadow-sm"
+      className="block bg-card rounded-lg border border-transparent hover:border-primary transition-colors focus-ring shadow-sm cursor-pointer"
     >
       <div className="hidden md:grid grid-cols-[1fr_1.2fr_1fr_1fr_auto_auto] items-center gap-8 px-6 py-5">
         <span className="text-sm font-bold tracking-tight">

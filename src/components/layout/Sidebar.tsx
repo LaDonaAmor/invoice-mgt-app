@@ -57,7 +57,7 @@ export function Sidebar() {
           aria-label={
             theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
           }
-          className="text-muted-foreground hover:text-sidebar-fg transition-colors focus-ring rounded-md p-2"
+          className="text-muted-foreground hover:text-sidebar-fg transition-colors focus-ring rounded-md p-2 cursor-pointer"
         >
           {theme === "dark" ? (
             <svg

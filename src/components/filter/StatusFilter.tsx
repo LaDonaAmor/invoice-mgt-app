@@ -53,7 +53,7 @@ export function StatusFilter({ value, onChange }: Props) {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="status-filter-menu"
-        className="inline-flex items-center gap-3 text-sm font-bold tracking-tight focus-ring rounded-md px-2 py-2 hover:text-primary"
+        className="inline-flex items-center gap-3 text-sm font-bold tracking-tight focus-ring rounded-md px-2 py-2 hover:text-primary cursor-pointer"
       >
         <span>
           <span className="hidden sm:inline">Filter by status</span>
