@@ -1,15 +1,26 @@
 import {
   forwardRef,
   useId,
+  useRef,
+  useState,
+  useEffect,
   type InputHTMLAttributes,
-  type SelectHTMLAttributes,
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
-import { useRef, useState, useEffect } from "react";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format, parseISO } from "date-fns";
+import {
+  Select as RadixSelect,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import type React from "react";
+
+// ─── Field Wrapper ───────────────────────────────────────────────────────────
 
 interface FieldWrapperProps {
   label?: string;
@@ -54,6 +65,8 @@ export function Field({
   );
 }
 
+// ─── Input ───────────────────────────────────────────────────────────────────
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
@@ -94,16 +107,71 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+// ─── Select ──────────────────────────────────────────────────────────────────
+
+interface SelectProps {
   label?: string;
   error?: string;
   options: { value: string; label: string }[];
   wrapperClassName?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
+
+export function Select({
+  label,
+  error,
+  options,
+  wrapperClassName,
+  value,
+  onChange,
+}: SelectProps) {
+  const generatedId = useId();
+
+  return (
+    <Field
+      id={generatedId}
+      label={label}
+      error={error}
+      className={wrapperClassName}
+    >
+      <RadixSelect
+        value={value as string}
+        onValueChange={(val) => {
+          onChange?.({
+            target: { value: val },
+          } as React.ChangeEvent<HTMLSelectElement>);
+        }}
+      >
+        <SelectTrigger
+          className={cn(
+            "h-12 w-full border bg-card px-5 text-sm font-bold text-foreground transition-colors focus-ring cursor-pointer",
+            error ? "border-destructive" : "border-border hover:border-primary",
+          )}
+        >
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((o) => (
+            <SelectItem
+              key={o.value}
+              value={o.value}
+              className="cursor-pointer"
+            >
+              {o.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </RadixSelect>
+    </Field>
+  );
+}
+
+// ─── DatePicker ──────────────────────────────────────────────────────────────
 
 interface DatePickerProps {
   label?: string;
-  value: string; // ISO string
+  value: string;
   onChange: (iso: string) => void;
   disabled?: boolean;
   error?: string;
@@ -177,42 +245,3 @@ export function DatePicker({
     </Field>
   );
 }
-
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    { className, label, error, id, options, wrapperClassName, ...rest },
-    ref,
-  ) => {
-    const generatedId = useId();
-    const selectId = id ?? rest.name ?? generatedId;
-
-    return (
-      <Field
-        id={selectId}
-        label={label}
-        error={error}
-        className={wrapperClassName}
-      >
-        <select
-          id={selectId}
-          ref={ref}
-          className={cn(
-            "h-12 w-full appearance-none rounded-md border bg-card px-5 text-sm font-bold text-foreground transition-colors focus-ring",
-            error ? "border-destructive" : "border-border hover:border-primary",
-            "bg-size-[10px] bg-no-repeat bg-position-[right_1.25rem_center]",
-            "bg-[url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 11 7'><path fill='none' stroke='%237C5DFA' stroke-width='2' d='M1 1l4.228 4 4.772-4'/></svg>\")]",
-            className,
-          )}
-          {...rest}
-        >
-          {options.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
-      </Field>
-    );
-  },
-);
-Select.displayName = "Select";

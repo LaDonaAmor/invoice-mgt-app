@@ -365,7 +365,7 @@ export function InvoiceForm({
           <button
             type="button"
             onClick={addItem}
-            className="mt-6 w-full h-12 rounded-full bg-secondary text-secondary-foreground font-bold text-sm hover:bg-secondary/70 dark:hover:bg-secondary/80 transition-colors focus-ring inline-flex items-center justify-center gap-2"
+            className="mt-6 w-full h-12 rounded-full bg-secondary text-secondary-foreground font-bold text-sm hover:bg-secondary/70 dark:hover:bg-secondary/80 transition-colors focus-ring inline-flex items-center justify-center gap-2 cursor-pointer"
           >
             <Plus className="h-4 w-4" strokeWidth={3} /> Add New Item
           </button>
