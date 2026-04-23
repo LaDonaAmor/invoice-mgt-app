@@ -42,7 +42,7 @@ export function InvoiceDetail() {
 
       <div className="bg-card rounded-lg p-6 md:p-8 flex items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-5">
-          <span className="text-xs text-muted-foreground">Status</span>
+          <span className="text-[13px] text-muted-foreground">Status</span>
           <StatusBadge status={inv.status} />
         </div>
         <div className="hidden md:flex items-center gap-2">
@@ -64,15 +64,15 @@ export function InvoiceDetail() {
       <div className="bg-card rounded-lg p-6 md:p-12 space-y-10 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
           <div>
-            <h1 className="text-base font-bold tracking-tight">
+            <h1 className="text-[15px] font-bold tracking-tight">
               <span className="text-muted-foreground">#</span>
               {inv.id}
             </h1>
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-[13px] text-muted-foreground mt-2">
               {inv.description || "—"}
             </p>
           </div>
-          <address className="not-italic text-xs text-muted-foreground md:text-right leading-relaxed">
+          <address className="not-italic text-[13px] text-muted-foreground md:text-right leading-relaxed">
             {inv.senderAddress.street}
             <br />
             {inv.senderAddress.city}
@@ -86,24 +86,28 @@ export function InvoiceDetail() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           <div className="space-y-8">
             <div>
-              <p className="text-xs text-muted-foreground mb-3">Invoice Date</p>
-              <p className="text-base font-bold tracking-tight">
+              <p className="text-[13px] text-muted-foreground mb-3">
+                Invoice Date
+              </p>
+              <p className="text-[15px] font-bold tracking-tight">
                 {formatDate(inv.createdAt)}
               </p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground mb-3">Payment Due</p>
-              <p className="text-base font-bold tracking-tight">
+              <p className="text-[13px] text-muted-foreground mb-3">
+                Payment Due
+              </p>
+              <p className="text-[15px] font-bold tracking-tight">
                 {formatDate(inv.paymentDue)}
               </p>
             </div>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground mb-3">Bill To</p>
-            <p className="text-base font-bold tracking-tight">
+            <p className="text-[13px] text-muted-foreground mb-3">Bill To</p>
+            <p className="text-[15px] font-bold tracking-tight">
               {inv.clientName || "—"}
             </p>
-            <address className="not-italic text-xs text-muted-foreground mt-2 leading-relaxed">
+            <address className="not-italic text-[13px] text-muted-foreground mt-2 leading-relaxed">
               {inv.clientAddress.street}
               <br />
               {inv.clientAddress.city}
@@ -114,14 +118,14 @@ export function InvoiceDetail() {
             </address>
           </div>
           <div className="col-span-2 md:col-span-1">
-            <p className="text-xs text-muted-foreground mb-3">Sent to</p>
-            <p className="text-base font-bold tracking-tight break-all">
+            <p className="text-[13px] text-muted-foreground mb-3">Sent to</p>
+            <p className="text-[15px] font-bold tracking-tight break-all">
               {inv.clientEmail || "—"}
             </p>
           </div>
         </div>
 
-        <div className="rounded-lg overflow-hidden bg-muted">
+        <div className="rounded-lg overflow-hidden bg-muted dark:bg-secondary">
           <div className="p-6 md:p-8">
             <div className="hidden md:grid grid-cols-[1fr_80px_110px_110px] gap-4 text-sm text-muted-foreground mb-6">
               <span>Item Name</span>
@@ -136,17 +140,17 @@ export function InvoiceDetail() {
                   className="grid grid-cols-2 md:grid-cols-[1fr_80px_110px_110px] gap-4 items-center"
                 >
                   <div>
-                    <p className="text-lg font-bold tracking-tight">
+                    <p className="text-[15px] font-bold tracking-tight">
                       {it.name}
                     </p>
-                    <p className="text-lg font-bold text-muted-foreground md:hidden mt-2">
+                    <p className="text-[15px] font-bold text-muted-foreground md:hidden mt-2">
                       {it.quantity} x {formatCurrency(it.price)}
                     </p>
                   </div>
-                  <p className="hidden md:block text-lg font-bold text-muted-foreground text-center">
+                  <p className="hidden md:block text-[15px] font-bold text-muted-foreground text-center">
                     {it.quantity}
                   </p>
-                  <p className="hidden md:block text-lg font-bold text-muted-foreground text-right">
+                  <p className="hidden md:block text-[15px] font-bold text-muted-foreground text-right">
                     {formatCurrency(it.price)}
                   </p>
                   <p className="text-lg font-bold tracking-tight text-right">
@@ -157,7 +161,7 @@ export function InvoiceDetail() {
             </ul>
           </div>
           <div className="bg-total-bg text-total-fg p-6 md:p-8 flex items-center justify-between">
-            <span className="text-xs">Amount Due</span>
+            <span className="text-[13px]">Amount Due</span>
             <span className="text-xl md:text-2xl font-bold tracking-tight">
               {formatCurrency(inv.total)}
             </span>
