@@ -1,5 +1,5 @@
 import { useTheme } from "@/context/ThemeContext";
-import avatar from "@/assets/img/Oval.png";
+import avatar from "@/assets/img/Oval.webp";
 
 export function Sidebar() {
   const { theme, toggle } = useTheme();
