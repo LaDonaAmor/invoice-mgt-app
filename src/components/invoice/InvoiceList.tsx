@@ -19,7 +19,7 @@ export function InvoiceList({ onNew }: { onNew: () => void }) {
               ? "No invoices"
               : filters.length === 0
                 ? `There are ${invoices.length} total invoices`
-                : `${filtered.length} ${filters.join(", ")} invoices${filtered.length === 1 ? "" : "s"}`}
+                : `${filtered.length} ${filters.join(", ")} invoices`}
           </p>
         </div>
         <div className="flex items-center gap-4 md:gap-10">

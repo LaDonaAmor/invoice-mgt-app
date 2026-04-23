@@ -84,7 +84,7 @@ export function Modal({
         aria-labelledby={labelledBy}
         className={cn(
           variant === "drawer"
-            ? "h-full w-full max-w-2xl bg-background shadow-2xl overflow-y-auto rounded-r-3xl animate-in slide-in-from-left duration-300"
+            ? "h-full w-full max-w-154 bg-background shadow-2xl overflow-y-auto rounded-r-3xl animate-in slide-in-from-left duration-300"
             : "w-full max-w-lg rounded-lg bg-card p-8 md:p-12 shadow-2xl animate-in zoom-in-95",
           className,
         )}
