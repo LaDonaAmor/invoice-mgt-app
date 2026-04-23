@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Trash2, Plus } from "lucide-react";
 import type { Invoice, InvoiceItem } from "@/types/invoice";
 import { Input, Select, DatePicker } from "../ui/FormFields";
@@ -51,11 +51,17 @@ export function InvoiceForm({
   const [submitAttempt, setSubmitAttempt] = useState<
     "draft" | "send" | "save" | null
   >(null);
+  // ── auto-scroll refs ──────────────────────────────────────────────────────
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const lastItemRef = useRef<HTMLLIElement>(null);
+  const addCountRef = useRef(0);
+  // ─────────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
     if (open) {
       setErrors({});
       setSubmitAttempt(null);
+      addCountRef.current = 0; // reset counter when form opens/resets
       if (initial) {
         const {
           id: _id,
@@ -71,6 +77,14 @@ export function InvoiceForm({
     }
   }, [open, initial]);
 
+  // ── scroll to the last item whenever one is added ─────────────────────────
+  useEffect(() => {
+    if (addCountRef.current === 0) return; // skip on initial render / form reset
+    lastItemRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollContainerRef.current?.scrollBy({ top: 60, behavior: "smooth" });
+  }, [state.items.length]);
+  // ─────────────────────────────────────────────────────────────────────────
+
   function patch<K extends keyof FormState>(key: K, value: FormState[K]) {
     setState((s) => ({ ...s, [key]: value }));
   }
@@ -84,6 +98,7 @@ export function InvoiceForm({
   }
 
   function addItem() {
+    addCountRef.current += 1; // increment before setState so effect fires correctly
     setState((s) => ({
       ...s,
       items: [
@@ -163,7 +178,11 @@ export function InvoiceForm({
   return (
     <Modal open={open} onClose={onClose} variant="drawer" labelledBy={titleId}>
       <div className="flex flex-col h-full">
-        <div className="px-6 sm:px-12 lg:px-14 pt-12 pb-6 flex-1 overflow-y-auto">
+        {/* ── scrollable body ── */}
+        <div
+          ref={scrollContainerRef}
+          className="px-6 sm:px-12 lg:px-14 pt-12 pb-6 flex-1 overflow-y-auto"
+        >
           <h2 id={titleId} className="text-2xl font-bold tracking-tight mb-10">
             {isEdit ? (
               <>
@@ -295,7 +314,7 @@ export function InvoiceForm({
             />
           </div>
 
-          {/* Items */}
+          {/* Item List */}
           <h3 className="text-lg md:text-xl font-bold text-muted-foreground mt-16 mb-6">
             Item List
           </h3>
@@ -309,11 +328,13 @@ export function InvoiceForm({
             </div>
           )}
           <ul className="space-y-4">
-            {state.items.map((it) => {
+            {state.items.map((it, index) => {
               const total = it.quantity * it.price;
+              const isLast = index === state.items.length - 1;
               return (
                 <li
                   key={it.id}
+                  ref={isLast ? lastItemRef : null}
                   className="grid grid-cols-2 md:grid-cols-[1fr_80px_120px_80px_24px] gap-4 items-end"
                 >
                   <Input
@@ -362,6 +383,7 @@ export function InvoiceForm({
               );
             })}
           </ul>
+
           <button
             type="button"
             onClick={addItem}
