@@ -132,7 +132,7 @@ All invoice data and the active theme preference are persisted to `localStorage`
 | ------------------- | --------------------------------------------- |
 | UI                  | React 18 + TypeScript                         |
 | Build tool          | Vite 5 (SWC)                                  |
-| Styling             | Tailwind CSS v3 + CSS-variable design tokens  |
+| Styling             | Tailwind CSS v4 + CSS-variable design tokens  |
 | Components          | shadcn/ui + Radix primitives                  |
 | Routing             | React Router v6                               |
 | State & persistence | React Context + custom `useLocalStorage` hook |
@@ -153,6 +153,8 @@ src/
 ├── types/              # Domain types: Invoice, InvoiceItem, InvoiceStatus, …
 ├── utils/              # formatCurrency, formatDate, generateId
 └── index.css           # Design tokens (HSL CSS variables, light + dark)
+public/
+└── favicon.svg         # Custom SVG brand mark
 ```
 
 ### Data Flow
@@ -249,18 +251,19 @@ Animations are limited to short opacity/scale transitions and respect `prefers-r
 
 ## Improvements Beyond Requirements
 
-| Feature                          | Description                                                                                   |
-| -------------------------------- | --------------------------------------------------------------------------------------------- |
-| **Light & dark mode**            | Persisted user preference with one-click toggle                                               |
-| **Automatic persistence**        | Invoice data and filter state survive page refreshes via `localStorage`                       |
-| **Two-tier form validation**     | Lenient for Save as Draft, strict for Save & Send, with per-field error messages              |
-| **Dynamic line items**           | Live per-row totals and an aggregated invoice total computed in the provider                  |
-| **Multi-select status filter**   | Filter by any combination of Draft, Pending, and Paid simultaneously                          |
-| **Fully responsive**             | Sidebar collapses, rows reflow, and the detail page gets a sticky bottom action bar on mobile |
-| **Focus-trapped modal + drawer** | Built from scratch for accessible, keyboard-friendly editing and confirmation dialogs         |
-| **Vitest + Testing Library**     | Test suite wired up with jsdom and a working sample test                                      |
-| **Token-driven design system**   | Adding a new theme requires editing one CSS variable block in `index.css`                     |
-| **Deterministic invoice IDs**    | Frontend Mentor-style IDs (`#XX1234`) generated consistently per invoice                      |
+| Feature                           | Description                                                                                                                                                                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Custom SVG favicon & branding** | Replaced the default Vite logo with a custom purple brand mark (`public/favicon.svg`, `#7C5DFA`) matching the app's design token. Declared via `<link rel="icon" type="image/svg+xml">` in `index.html` for crisp, resolution-independent rendering in all modern browsers |
+| **Light & dark mode**             | Persisted user preference with one-click toggle                                                                                                                                                                                                                            |
+| **Automatic persistence**         | Invoice data and filter state survive page refreshes via `localStorage`                                                                                                                                                                                                    |
+| **Two-tier form validation**      | Lenient for Save as Draft, strict for Save & Send, with per-field error messages                                                                                                                                                                                           |
+| **Dynamic line items**            | Live per-row totals and an aggregated invoice total computed in the provider                                                                                                                                                                                               |
+| **Multi-select status filter**    | Filter by any combination of Draft, Pending, and Paid simultaneously                                                                                                                                                                                                       |
+| **Fully responsive**              | Sidebar collapses, rows reflow, and the detail page gets a sticky bottom action bar on mobile                                                                                                                                                                              |
+| **Focus-trapped modal + drawer**  | Built from scratch for accessible, keyboard-friendly editing and confirmation dialogs                                                                                                                                                                                      |
+| **Vitest + Testing Library**      | Test suite wired up with jsdom and a working sample test                                                                                                                                                                                                                   |
+| **Token-driven design system**    | Adding a new theme requires editing one CSS variable block in `index.css`                                                                                                                                                                                                  |
+| **Deterministic invoice IDs**     | Frontend Mentor-style IDs (`#XX1234`) generated consistently per invoice                                                                                                                                                                                                   |
 
 ---
 
