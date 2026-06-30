@@ -6,7 +6,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/invoice-mgt-app/",
+  base: "/",
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
